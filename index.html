@@ -1,0 +1,641 @@
+Tienes razón: te mandé el archivo, pero no pegué el código aquí. **Reemplaza todo el contenido de tu `index.html` con este código.** La foto debe estar en `assets/edwin-monroy.jpeg`, dentro de la misma carpeta.
+
+```html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Edwin A. Monroy — HR Operations Specialist, HRIS, Employee Lifecycle and HR Compliance.">
+  <title>Edwin A. Monroy | HR Operations Specialist</title>
+
+  <style>
+    :root {
+      --navy: #123d65;
+      --blue: #1769aa;
+      --ink: #142536;
+      --muted: #627487;
+      --line: #dce5ed;
+      --font: Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #fff;
+      font-family: var(--font);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .site-header {
+      height: 76px;
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #edf1f4;
+    }
+
+    .wordmark {
+      color: var(--navy);
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .wordmark span { color: var(--blue); }
+
+    .top-nav {
+      display: flex;
+      gap: 30px;
+      color: #4e6070;
+      font-size: 13px;
+    }
+
+    .top-nav a:hover,
+    .email-link:hover { color: var(--blue); }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 54px 36px 38px;
+      background:
+        radial-gradient(ellipse 56% 95% at 96% 42%,
+          rgba(229, 241, 250, .9) 0%,
+          rgba(242, 248, 252, .58) 42%,
+          rgba(255, 255, 255, 0) 79%),
+        #fff;
+    }
+
+    .hero-inner {
+      max-width: 1120px;
+      min-height: 420px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      align-items: center;
+    }
+
+    .portrait-wrap {
+      position: relative;
+      z-index: 1;
+      width: 260px;
+      height: 260px;
+      margin-left: 12px;
+      overflow: hidden;
+      border-radius: 50%;
+      background: #e8eff5;
+      box-shadow: 0 18px 45px rgba(23, 54, 81, .15);
+    }
+
+    .portrait {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 28%;
+    }
+
+    .portrait-dot {
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      width: 14px;
+      height: 14px;
+      border: 3px solid white;
+      border-radius: 50%;
+      background: #54a87a;
+    }
+
+    .intro-card {
+      position: relative;
+      margin-left: -2px;
+      padding: 42px 42px 70px 48px;
+      border: 1.5px solid var(--blue);
+      border-radius: 8px 24px 24px 8px;
+      background: rgba(255, 255, 255, .82);
+      box-shadow: 0 16px 54px rgba(33, 80, 117, .05);
+    }
+
+    .card-topline {
+      position: absolute;
+      top: 18px;
+      right: 22px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #718497;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .availability-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #55a87a;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      color: var(--navy);
+      font-size: clamp(34px, 4vw, 50px);
+      line-height: 1.08;
+      letter-spacing: -2px;
+    }
+
+    .specialties {
+      margin: 0 0 19px;
+      color: var(--blue);
+      font-size: 11px;
+      line-height: 1.8;
+      font-weight: 700;
+      letter-spacing: .25px;
+    }
+
+    .specialties span {
+      padding: 0 3px;
+      color: #a2b4c3;
+    }
+
+    .hero-copy {
+      max-width: 680px;
+      margin: 0 0 22px;
+      color: #506274;
+      font-size: 12.5px;
+      line-height: 1.7;
+    }
+
+    .profile-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .profile-tab {
+      padding: 10px 15px;
+      border: 1px solid #d6e2ed;
+      border-radius: 999px;
+      background: #fff;
+      color: #4c6072;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .profile-tab:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    .profile-tab.is-selected {
+      border-color: var(--navy);
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .contact-link {
+      position: absolute;
+      right: 25px;
+      bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .hero-foot {
+      max-width: 1120px;
+      margin: 12px auto 0;
+      padding-left: 312px;
+      display: flex;
+      justify-content: space-between;
+      color: #8694a2;
+      font-size: 10px;
+    }
+
+    .profile-section,
+    .contact-section {
+      max-width: 1060px;
+      margin: auto;
+      padding: 70px 36px;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      align-items: end;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--blue);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: 30px;
+      letter-spacing: -1px;
+    }
+
+    .profile-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      padding-top: 32px;
+    }
+
+    .panel-summary {
+      display: flex;
+      gap: 18px;
+    }
+
+    .panel-index {
+      padding-top: 4px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .panel-summary p {
+      max-width: 420px;
+      margin: 0;
+      color: #526476;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .panel-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .panel-details h3 {
+      margin: 0 0 14px;
+      color: var(--navy);
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .panel-details ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .panel-details li {
+      position: relative;
+      margin-bottom: 10px;
+      padding-left: 14px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .panel-details li::before {
+      position: absolute;
+      top: 8px;
+      left: 0;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #5b9acb;
+      content: "";
+    }
+
+    .contact-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--line);
+    }
+
+    .contact-section .eyebrow { margin-bottom: 10px; }
+
+    .contact-section h2 { font-size: 38px; }
+
+    .email-link {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    footer {
+      max-width: 1060px;
+      margin: auto;
+      padding: 18px 36px 28px;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #edf1f4;
+      color: #8794a0;
+      font-size: 10px;
+    }
+
+    @media (max-width: 760px) {
+      .site-header {
+        height: 66px;
+        padding: 0 20px;
+      }
+
+      .top-nav { gap: 18px; }
+
+      .hero {
+        padding: 34px 20px 28px;
+      }
+
+      .hero-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .portrait-wrap {
+        width: 155px;
+        height: 155px;
+        margin: 0 auto -18px 14px;
+      }
+
+      .intro-card {
+        padding: 42px 23px 68px;
+        border-radius: 8px 20px 20px;
+      }
+
+      h1 { font-size: 38px; }
+
+      .hero-copy { font-size: 13px; }
+
+      .hero-foot {
+        padding: 20px 2px 0;
+      }
+
+      .profile-section,
+      .contact-section {
+        padding: 54px 24px;
+      }
+
+      .section-heading {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .section-heading h2 { font-size: 27px; }
+
+      .profile-panel {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .contact-section {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 25px;
+      }
+
+      .contact-section h2 { font-size: 34px; }
+
+      footer { padding: 18px 24px 25px; }
+    }
+
+    @media (max-width: 420px) {
+      .panel-details { grid-template-columns: 1fr; }
+
+      .specialties { font-size: 10px; }
+
+      .intro-card { padding-right: 18px; padding-left: 18px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="#home" aria-label="Edwin A. Monroy, home">EM<span>.</span></a>
+    <nav class="top-nav" aria-label="Main navigation">
+      <a href="#profile">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="home">
+    <section class="hero" id="profile" aria-labelledby="name-heading">
+      <div class="hero-inner">
+        <div class="portrait-wrap">
+          <img
+            class="portrait"
+            src="assets/edwin-monroy.jpeg"
+            alt="Professional portrait of Edwin A. Monroy"
+          >
+          <span class="portrait-dot" aria-hidden="true"></span>
+        </div>
+
+        <div class="intro-card">
+          <div class="card-topline">
+            <span class="availability-dot"></span>
+            <span>About Me</span>
+          </div>
+
+          <h1 id="name-heading">Edwin A. Monroy</h1>
+
+          <p class="specialties">
+            HR Operations Specialist <span>|</span> HRIS
+            <span>|</span> Employee Lifecycle <span>|</span> HR Compliance
+          </p>
+
+          <p class="hero-copy">
+            I am an HR professional with experience in HR Operations, Recruitment,
+            and Talent Acquisition. I am a dynamic, curious, and improvement-driven
+            professional who enjoys getting involved in different areas of an
+            organization and understanding how processes work. For me, “that’s not
+            part of my job” is not a barrier to contributing; I see new
+            responsibilities and challenges as opportunities to learn and create
+            value. I view every professional experience as an exchange of value:
+            I bring my time, knowledge, and capabilities while continuously
+            gaining experience, skills, and learning. I am characterized by my
+            Growth Mindset, analytical thinking, attention to detail,
+            adaptability, and ability to quickly learn, understand, and improve
+            processes.
+          </p>
+
+          <div class="profile-tabs" role="tablist" aria-label="Choose a professional profile">
+            <button
+              class="profile-tab is-selected"
+              id="tab-hr"
+              role="tab"
+              aria-selected="true"
+              aria-controls="profile-panel"
+              data-profile="hr"
+            >
+              HR Operations
+            </button>
+            <button
+              class="profile-tab"
+              id="tab-data"
+              role="tab"
+              aria-selected="false"
+              aria-controls="profile-panel"
+              data-profile="data"
+            >
+              Data Science &amp; BI
+            </button>
+          </div>
+
+          <a class="contact-link" href="#contact">
+            Get in touch <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-foot">
+        <span>Bogotá, Colombia · Open to opportunities</span>
+        <span id="profile-count">01 / 02</span>
+      </div>
+    </section>
+
+    <section class="profile-section" aria-live="polite">
+      <div class="section-heading">
+        <p class="eyebrow">MY FOCUS</p>
+        <h2 id="panel-title">HR Operations</h2>
+      </div>
+
+      <div class="profile-panel" id="profile-panel" role="tabpanel" aria-labelledby="tab-hr">
+        <div class="panel-summary">
+          <span class="panel-index">01</span>
+          <p id="panel-description">
+            I support Human Resources operations with a people-focused perspective
+            and a strong commitment to process quality, from onboarding through
+            every stage of the employee lifecycle.
+          </p>
+        </div>
+
+        <div class="panel-details">
+          <div>
+            <h3>Areas of focus</h3>
+            <ul id="panel-strengths">
+              <li>Human Resources operations</li>
+              <li>Employee lifecycle</li>
+              <li>Recruitment and talent acquisition</li>
+              <li>Compliance and process improvement</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3>Tools &amp; skills</h3>
+            <ul id="panel-skills">
+              <li>HRIS and employee administration</li>
+              <li>Excel and information analysis</li>
+              <li>Attention to detail</li>
+              <li>Cross-functional collaboration</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+      <div>
+        <p class="eyebrow">NEXT STEP</p>
+        <h2>Let’s connect.</h2>
+      </div>
+      <a class="email-link" href="mailto:edwamontoya.94@gmail.com">
+        edwamontoya.94@gmail.com <span aria-hidden="true">↗</span>
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> Edwin A. Monroy</span>
+    <span>Made with intention · Bogotá</span>
+  </footer>
+
+  <script>
+    const profiles = {
+      hr: {
+        title: "HR Operations",
+        description:
+          "I support Human Resources operations with a people-focused perspective and a strong commitment to process quality, from onboarding through every stage of the employee lifecycle.",
+        strengths: [
+          "Human Resources operations",
+          "Employee lifecycle",
+          "Recruitment and talent acquisition",
+          "Compliance and process improvement"
+        ],
+        skills: [
+          "HRIS and employee administration",
+          "Excel and information analysis",
+          "Attention to detail",
+          "Cross-functional collaboration"
+        ]
+      },
+      data: {
+        title: "Data Science, Big Data & Business Intelligence",
+        description:
+          "I am pursuing a master’s degree in data analytics and building a practical foundation for turning information into clear decisions. I have experience with spreadsheet formulas and analysis, and continue to grow my skills.",
+        strengths: [
+          "Data analysis and preparation",
+          "Big Data and Business Intelligence",
+          "Information visualization",
+          "Applying data to business decisions"
+        ],
+        skills: [
+          "Excel formulas and functions",
+          "Data organization and cleaning",
+          "Analytical thinking",
+          "Continuous learning"
+        ]
+      }
+    };
+
+    function setProfile(profileKey) {
+      const profile = profiles[profileKey];
+
+      document.querySelectorAll(".profile-tab").forEach((button) => {
+        const selected = button.dataset.profile === profileKey;
+        button.classList.toggle("is-selected", selected);
+        button.setAttribute("aria-selected", String(selected));
+      });
+
+      document.getElementById("panel-title").textContent = profile.title;
+      document.getElementById("panel-description").textContent = profile.description;
+      document.getElementById("panel-strengths").innerHTML =
+        profile.strengths.map((item) => `<li>${item}</li>`).join("");
+      document.getElementById("panel-skills").innerHTML =
+        profile.skills.map((item) => `<li>${item}</li>`).join("");
+
+      document.getElementById("profile-panel").setAttribute(
+        "aria-labelledby",
+        profileKey === "hr" ? "tab-hr" : "tab-data"
+      );
+
+      document.getElementById("profile-count").textContent =
+        profileKey === "hr" ? "01 / 02" : "02 / 02";
+    }
+
+    document.querySelectorAll(".profile-tab").forEach((button) => {
+      button.addEventListener("click", () => setProfile(button.dataset.profile));
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+```
