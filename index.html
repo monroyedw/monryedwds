@@ -226,15 +226,58 @@
       font-size: 10px;
     }
 
-    .skills-section,
+    .resume-section,
     .contact-section {
       max-width: 1060px;
       margin: auto;
       padding: 70px 36px;
     }
 
-    .skills-section {
+    .resume-section {
       padding-top: 42px;
+    }
+
+    .resume-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .resume-tab {
+      padding: 12px 19px;
+      border: 1px solid #d6e2ed;
+      border-radius: 999px;
+      background: #fff;
+      color: #4c6072;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .4px;
+      cursor: pointer;
+      transition: border-color .18s ease, background .18s ease, color .18s ease, transform .18s ease;
+    }
+
+    .resume-tab:hover {
+      transform: translateY(-1px);
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    .resume-tab.is-selected {
+      border-color: var(--navy);
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .resume-tab:focus-visible {
+      outline: 2px solid var(--blue);
+      outline-offset: -3px;
+    }
+
+    .resume-panel[hidden] {
+      display: none;
     }
 
     .skills-heading {
@@ -285,6 +328,121 @@
       color: var(--muted);
       font-size: 13px;
       line-height: 1.7;
+    }
+
+    .achievement-list,
+    .experience-list,
+    .education-list,
+    .certification-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .achievement-list li,
+    .certification-list li {
+      position: relative;
+      margin-bottom: 16px;
+      padding-left: 20px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    .achievement-list li::before,
+    .certification-list li::before {
+      position: absolute;
+      left: 0;
+      color: var(--blue);
+      content: "▪";
+    }
+
+    .experience-entry {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .experience-entry:first-child {
+      padding-top: 0;
+    }
+
+    .experience-entry:last-child {
+      border-bottom: 0;
+    }
+
+    .experience-topline,
+    .experience-roleline,
+    .education-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .experience-topline,
+    .experience-roleline {
+      align-items: baseline;
+    }
+
+    .experience-topline strong,
+    .education-item strong {
+      color: var(--navy);
+      font-size: 13px;
+    }
+
+    .experience-topline span,
+    .experience-roleline span,
+    .education-item span {
+      flex: 0 0 auto;
+      color: var(--muted);
+      font-size: 11px;
+      text-align: right;
+    }
+
+    .experience-roleline {
+      margin-top: 5px;
+    }
+
+    .experience-roleline strong {
+      color: var(--blue);
+      font-size: 12px;
+      font-style: italic;
+    }
+
+    .experience-entry ul {
+      margin: 10px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .experience-entry li {
+      padding-left: 3px;
+      margin-bottom: 5px;
+    }
+
+    .education-item {
+      align-items: flex-start;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .education-item:first-child {
+      padding-top: 0;
+    }
+
+    .education-item:last-child {
+      border-bottom: 0;
+    }
+
+    .education-item div {
+      display: grid;
+      gap: 4px;
+    }
+
+    .education-item em {
+      color: var(--muted);
+      font-size: 12px;
     }
 
     .contact-section {
@@ -355,13 +513,29 @@
         padding: 20px 2px 0;
       }
 
-      .skills-section,
+      .resume-section,
       .contact-section {
         padding: 54px 24px;
       }
 
-      .skills-section {
+      .resume-section {
         padding-top: 34px;
+      }
+
+      .resume-tabs {
+        justify-content: center;
+        gap: 8px;
+        margin-right: -24px;
+        margin-left: -24px;
+        padding: 0 14px 4px;
+        flex-wrap: wrap;
+        overflow-x: auto;
+      }
+
+      .resume-tab {
+        flex: 0 1 auto;
+        padding: 11px 14px;
+        font-size: 11px;
       }
 
       .skills-heading h2 { font-size: 27px; }
@@ -370,6 +544,20 @@
         grid-template-columns: 1fr;
         gap: 7px;
         padding: 9px 0;
+      }
+
+      .experience-topline,
+      .experience-roleline,
+      .education-item {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .experience-topline span,
+      .experience-roleline span,
+      .education-item span {
+        text-align: left;
       }
 
       .contact-section {
@@ -477,41 +665,184 @@
       </div>
     </section>
 
-    <section class="skills-section" id="skills">
-      <div class="skills-heading">
-        <h2>Technical Skills</h2>
+    <section class="resume-section" id="experience">
+      <div class="resume-tabs" role="tablist" aria-label="Professional information">
+        <button class="resume-tab is-selected" id="tab-technical" type="button" role="tab" aria-selected="true" aria-controls="panel-technical" tabindex="0">Technical Skills</button>
+        <button class="resume-tab" id="tab-achievements" type="button" role="tab" aria-selected="false" aria-controls="panel-achievements" tabindex="-1">ACHIEVEMENTS</button>
+        <button class="resume-tab" id="tab-work" type="button" role="tab" aria-selected="false" aria-controls="panel-work" tabindex="-1">WORK EXPERIENCE</button>
+        <button class="resume-tab" id="tab-education" type="button" role="tab" aria-selected="false" aria-controls="panel-education" tabindex="-1">EDUCATION</button>
+        <button class="resume-tab" id="tab-certifications" type="button" role="tab" aria-selected="false" aria-controls="panel-certifications" tabindex="-1">CERTIFICATIONS</button>
       </div>
 
-      <div class="skills-list">
-        <div class="skill-row">
-          <h3>HR Operations</h3>
-          <p>People Administration, Employee Onboarding, Employee Lifecycle Management, Talent Acquisition</p>
+      <div class="resume-panel" id="panel-technical" role="tabpanel" aria-labelledby="tab-technical">
+        <div class="skills-heading">
+          <h2>Technical Skills</h2>
         </div>
+        <div class="skills-list">
+          <div class="skill-row">
+            <h3>HR Operations</h3>
+            <p>People Administration, Employee Onboarding, Employee Lifecycle Management, Talent Acquisition</p>
+          </div>
+          <div class="skill-row">
+            <h3>HR Compliance &amp; Documentation</h3>
+            <p>HR Audits, Compliance, Employee Handbooks, Documentation Management</p>
+          </div>
+          <div class="skill-row">
+            <h3>HR Data &amp; Process Improvement</h3>
+            <p>Database Validation, Data Reconciliation, HR Reporting, Process Improvement</p>
+          </div>
+          <div class="skill-row">
+            <h3>Microsoft Excel</h3>
+            <p>PivotTables, VLOOKUP, XLOOKUP, Reconciliations, Reporting</p>
+          </div>
+          <div class="skill-row">
+            <h3>HRIS &amp; Business Tools</h3>
+            <p>ADP, DocuSign, Paycom</p>
+          </div>
+          <div class="skill-row">
+            <h3>Languages</h3>
+            <p>English (C1), Spanish (Native)</p>
+          </div>
+        </div>
+      </div>
 
-        <div class="skill-row">
-          <h3>HR Compliance &amp; Documentation</h3>
-          <p>HR Audits, Compliance, Employee Handbooks, Documentation Management</p>
+      <div class="resume-panel" id="panel-achievements" role="tabpanel" aria-labelledby="tab-achievements" hidden>
+        <div class="skills-heading">
+          <h2>ACHIEVEMENTS</h2>
         </div>
+        <ul class="achievement-list">
+          <li>Coordinated employee onboarding processes for approximately <strong>35 - 45 new hires per month</strong>, ensuring timely completion of required documentation and onboarding requirements.</li>
+          <li>Implemented an automated employee separation tracking workflow using <strong>Google Apps Script, Google Sheets</strong>, and <strong>Google Forms,</strong> enabling real-time notifications and centralized documentation for HR compliance.</li>
+          <li>Built an <strong>HR data reconciliation process</strong> improving the offboarding process by 80% while increasing compliance and workforce data traceability.</li>
+          <li>Conducted <strong>compliance audits for 40–50 new hire files per month</strong>, identifying documentation discrepancies and improving onboarding accuracy, resulting in 98% legal compliance.</li>
+        </ul>
+      </div>
 
-        <div class="skill-row">
-          <h3>HR Data &amp; Process Improvement</h3>
-          <p>Database Validation, Data Reconciliation, HR Reporting, Process Improvement</p>
+      <div class="resume-panel" id="panel-work" role="tabpanel" aria-labelledby="tab-work" hidden>
+        <div class="skills-heading">
+          <h2>WORK EXPERIENCE</h2>
         </div>
+        <div class="experience-list">
+          <article class="experience-entry">
+            <div class="experience-topline">
+              <strong>Babco Building Services LLC | Remote</strong>
+              <span>Jun 2025 – Present</span>
+            </div>
+            <div class="experience-roleline">
+              <strong>HR Operations Analyst | April 2026 – Present</strong>
+              <span><em>New Jersey, United States</em></span>
+            </div>
+            <ul>
+              <li>Support HR operations by generating operational reports, validating employee data and documentation, and monitoring onboarding and offboarding processes to ensure compliance and record accuracy. Coordinate HR process improvements through Excel and Google Workspace automation, maintain employee records and HR systems, and collaborate with HR teams to standardize workflows and support daily operations.</li>
+            </ul>
+            <div class="experience-roleline">
+              <strong>Human Resources Analyst | Jun 2025 – April 2026</strong>
+            </div>
+            <ul>
+              <li>Managed employee onboarding, documentation, compliance requirements, and employee relations while ensuring accurate HR records and timely HRIS updates. Coordinated hiring documentation, supported compliance with company policies, and partnered with recruiters and managers to facilitate onboarding and employee lifecycle processes.</li>
+            </ul>
+          </article>
+          <article class="experience-entry">
+            <div class="experience-topline">
+              <strong>Edmund Enterprises</strong>
+              <span>Nov 2024 – Apr 2025</span>
+            </div>
+            <div class="experience-roleline">
+              <strong>Talent Acquisition Specialist.</strong>
+              <span><em>Michigan, United States</em></span>
+            </div>
+            <ul>
+              <li>As a Talent Acquisition, my main duties include creating job postings on LinkedIn for the South American and South African markets, reviewing applications and resumes, and creating a shortlist of qualified candidates by verifying their experience. Additionally, I contact candidates, invite them for interviews, and manage the entire interview process. I assist in decision-making and the development of recruitment and selection strategies.</li>
+              <li>As a Virtual Assistant, I handle back-office tasks such as researching HR, technology, and startup events, gathering information about speakers and presenters using CRMs like Apollo, CrunchBase, Salesforce, among others, while ensuring and prospecting clients for new business opportunities.</li>
+            </ul>
+          </article>
+          <article class="experience-entry">
+            <div class="experience-topline">
+              <strong>Solvo Global Careers / Griswold Home Care, US (Remote).</strong>
+              <span>Oct 2024 – May 2025</span>
+            </div>
+            <div class="experience-roleline">
+              <strong>Recruiter</strong>
+              <span><em>Cali, Valle del Cauca</em></span>
+            </div>
+            <ul>
+              <li>Identify and attract candidates through various platforms and professional networks.</li>
+              <li>Full-cycle recruitment management for Griswold Home Care, handling all stages from job posting and candidate sourcing to resume evaluation and onboarding new hires.</li>
+              <li>Led talent sourcing and ensured a positive candidate experience by providing feedback and coordinating interviews with team leaders and hiring managers.</li>
+              <li>Optimized recruitment processes through metric analysis and collaborated with HR on talent attraction strategies to meet organizational goals.</li>
+            </ul>
+          </article>
+          <article class="experience-entry">
+            <div class="experience-topline">
+              <strong>Tic Group</strong>
+              <span>Oct 2022 – May 2024</span>
+            </div>
+            <div class="experience-roleline">
+              <strong>Pick Packer</strong>
+              <span><em>Melbourne, Victoria, Australia</em></span>
+            </div>
+            <ul>
+              <li>Responsible for efficiently carrying out general warehouse duties, including order picking and packing in a fast-paced environment.</li>
+              <li>Utilized handheld scanners to accurately track inventory and ensure correct order fulfillment.</li>
+              <li>Collaborated with team members to meet daily targets, maintain organization within the warehouse, and uphold high standards of safety and accuracy in all operations.</li>
+            </ul>
+          </article>
+          <article class="experience-entry">
+            <div class="experience-topline">
+              <strong>Security Management</strong>
+              <span>Dec 2019 – Oct 2022</span>
+            </div>
+            <div class="experience-roleline">
+              <strong>Home Visit Specialist</strong>
+              <span><em>Cali, Colombia</em></span>
+            </div>
+            <ul>
+              <li>Assisted in the recruitment process by scheduling home visits, conducting interviews, and writing reports.</li>
+              <li>Key responsibilities included analyzing candidates' economic, social, family, and work environments to identify potential risks.</li>
+              <li>Performed resume profiling to identify the best candidates for positions and created job profiles based on client company requirements.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
 
-        <div class="skill-row">
-          <h3>Microsoft Excel</h3>
-          <p>PivotTables, VLOOKUP, XLOOKUP, Reconciliations, Reporting</p>
+      <div class="resume-panel" id="panel-education" role="tabpanel" aria-labelledby="tab-education" hidden>
+        <div class="skills-heading">
+          <h2>EDUCATION</h2>
         </div>
+        <div class="education-list">
+          <div class="education-item">
+            <div>
+              <strong>Universidad Complutense de Madrid, 2026 – 2027 (En curso)</strong>
+              <em>Master Data Science, Big Data and Business Analytics</em>
+            </div>
+            <span>Madrid, España</span>
+          </div>
+          <div class="education-item">
+            <div>
+              <strong>Universidad San Buenaventura, 2016 - 2021</strong>
+              <em>Pregrado en Psicología, Organizacional</em>
+            </div>
+            <span>Cali, Colombia</span>
+          </div>
+          <div class="education-item">
+            <div>
+              <strong>Universal English College, 2022 - 2023</strong>
+              <em>Ingles General, Upper Intermediate B+</em>
+            </div>
+            <span>Melbourne, Victoria, Australia</span>
+          </div>
+        </div>
+      </div>
 
-        <div class="skill-row">
-          <h3>HRIS &amp; Business Tools</h3>
-          <p>ADP, DocuSign, Paycom</p>
+      <div class="resume-panel" id="panel-certifications" role="tabpanel" aria-labelledby="tab-certifications" hidden>
+        <div class="skills-heading">
+          <h2>CERTIFICATIONS</h2>
         </div>
-
-        <div class="skill-row">
-          <h3>Languages</h3>
-          <p>English (C1), Spanish (Native)</p>
-        </div>
+        <ul class="certification-list">
+          <li>General English, Upper Intermediate Level, <strong>Melbourne Australia 2023</strong></li>
+          <li>Interviews and home visits with an emphasis on BASC security</li>
+          <li>EF SET English Certificate <strong>(C1 Advanced)</strong></li>
+        </ul>
       </div>
     </section>
 
@@ -565,6 +896,40 @@
 
     document.querySelectorAll(".profile-tab").forEach((button) => {
       button.addEventListener("click", () => setProfile(button.dataset.profile));
+    });
+
+    const resumeTabs = document.querySelectorAll(".resume-tab");
+
+    function setResumeTab(selectedTab) {
+      resumeTabs.forEach((tab) => {
+        const isSelected = tab === selectedTab;
+        tab.classList.toggle("is-selected", isSelected);
+        tab.setAttribute("aria-selected", String(isSelected));
+        tab.tabIndex = isSelected ? 0 : -1;
+        document.getElementById(tab.getAttribute("aria-controls")).hidden = !isSelected;
+      });
+    }
+
+    resumeTabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => setResumeTab(tab));
+      tab.addEventListener("keydown", (event) => {
+        let nextIndex = index;
+        if (event.key === "ArrowRight") {
+          nextIndex = (index + 1) % resumeTabs.length;
+        } else if (event.key === "ArrowLeft") {
+          nextIndex = (index - 1 + resumeTabs.length) % resumeTabs.length;
+        } else if (event.key === "Home") {
+          nextIndex = 0;
+        } else if (event.key === "End") {
+          nextIndex = resumeTabs.length - 1;
+        } else {
+          return;
+        }
+
+        event.preventDefault();
+        resumeTabs[nextIndex].focus();
+        setResumeTab(resumeTabs[nextIndex]);
+      });
     });
 
     document.getElementById("year").textContent = new Date().getFullYear();
