@@ -1,6 +1,3 @@
-
-
-```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -32,6 +29,11 @@
 
     a { color: inherit; text-decoration: none; }
 
+    .top-bar {
+      height: 24px;
+      background: var(--blue);
+    }
+
     .site-header {
       height: 76px;
       max-width: 1200px;
@@ -52,14 +54,6 @@
 
     .wordmark span { color: var(--blue); }
 
-    .top-nav {
-      display: flex;
-      gap: 30px;
-      color: #4e6070;
-      font-size: 13px;
-    }
-
-    .top-nav a:hover,
     .email-link:hover { color: var(--blue); }
 
     .hero {
@@ -144,18 +138,18 @@
       background: #55a87a;
     }
 
-    h1 {
+    .intro-card h1 {
       margin: 0 0 10px;
       color: var(--navy);
-      font-size: clamp(34px, 4vw, 50px);
+      font-size: clamp(30px, 3.2vw, 40px);
       line-height: 1.08;
-      letter-spacing: -2px;
+      letter-spacing: -1.5px;
     }
 
     .specialties {
       margin: 0 0 19px;
       color: var(--blue);
-      font-size: 11px;
+      font-size: 14px;
       line-height: 1.8;
       font-weight: 700;
       letter-spacing: .25px;
@@ -191,6 +185,7 @@
       font-size: 11px;
       font-weight: 600;
       cursor: pointer;
+      white-space: nowrap;
     }
 
     .profile-tab:hover {
@@ -450,23 +445,65 @@
     }
 
     .contact-section {
+      position: relative;
+      overflow: hidden;
+      max-width: none;
+      padding: 0;
+      background: linear-gradient(115deg, #104e80 0%, var(--blue) 55%, #2782b9 100%);
+      color: #fff;
+    }
+
+    .contact-section::before {
+      position: absolute;
+      inset: 0;
+      background: repeating-radial-gradient(
+        circle at 78% 50%,
+        rgba(255, 255, 255, .25) 0 1px,
+        transparent 1px 22px
+      );
+      content: "";
+      pointer-events: none;
+    }
+
+    .contact-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1060px;
+      margin: auto;
+      padding: 70px 36px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-top: 1px solid var(--line);
     }
 
-    .contact-section .eyebrow { margin-bottom: 10px; }
+    .contact-section .eyebrow {
+      margin-bottom: 10px;
+      color: #fff;
+    }
 
-    .contact-section h2 { font-size: 38px; }
+    .contact-section h2 {
+      color: #fff;
+      font-size: 38px;
+    }
 
     .email-link {
       display: flex;
       align-items: center;
       gap: 16px;
-      color: var(--navy);
-      font-size: 14px;
-      font-weight: 600;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .contact-details {
+      display: grid;
+      gap: 16px;
+    }
+
+    .contact-location {
+      color: #fff;
+      font-size: 17px;
+      font-weight: 700;
     }
 
     footer {
@@ -483,10 +520,18 @@
     @media (max-width: 760px) {
       .site-header {
         height: 66px;
-        padding: 0 20px;
+        padding: 0 14px;
       }
 
-      .top-nav { gap: 18px; }
+      .site-header .profile-tabs {
+        flex-wrap: nowrap;
+        gap: 6px;
+      }
+
+      .site-header .profile-tab {
+        padding: 8px 10px;
+        font-size: 10px;
+      }
 
       .hero {
         padding: 34px 20px 28px;
@@ -509,7 +554,7 @@
         border-radius: 8px 20px 20px;
       }
 
-      h1 { font-size: 38px; }
+      .intro-card h1 { font-size: 32px; }
 
       .hero-copy { font-size: 13px; }
 
@@ -518,7 +563,7 @@
       }
 
       .resume-section,
-      .contact-section {
+      .contact-inner {
         padding: 54px 24px;
       }
 
@@ -564,7 +609,7 @@
         text-align: left;
       }
 
-      .contact-section {
+      .contact-inner {
         align-items: flex-start;
         flex-direction: column;
         gap: 25px;
@@ -576,21 +621,46 @@
     }
 
     @media (max-width: 420px) {
-      .specialties { font-size: 10px; }
+      .specialties { font-size: 12px; }
 
       .intro-card { padding-right: 18px; padding-left: 18px; }
+
+      .site-header .profile-tab {
+        padding: 7px 8px;
+        font-size: 9px;
+      }
     }
   </style>
 </head>
 
 <body>
+  <div class="top-bar" aria-hidden="true"></div>
   <header class="site-header">
     <a class="wordmark" href="#home" aria-label="Edwin A. Monroy, home">EM<span>.</span></a>
-    <nav class="top-nav" aria-label="Main navigation">
-      <a href="#profile">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <div class="profile-tabs" role="tablist" aria-label="Choose a professional profile">
+      <button
+        class="profile-tab is-selected"
+        id="tab-hr"
+        type="button"
+        role="tab"
+        aria-selected="true"
+        aria-controls="hero-profile-panel"
+        data-profile="hr"
+      >
+        HR Operations
+      </button>
+      <button
+        class="profile-tab"
+        id="tab-data"
+        type="button"
+        role="tab"
+        aria-selected="false"
+        aria-controls="hero-profile-panel"
+        data-profile="data"
+      >
+        Data Science &amp; BI
+      </button>
+    </div>
   </header>
 
   <main id="home">
@@ -635,29 +705,6 @@
             </p>
           </div>
 
-          <div class="profile-tabs" role="tablist" aria-label="Choose a professional profile">
-            <button
-              class="profile-tab is-selected"
-              id="tab-hr"
-              role="tab"
-              aria-selected="true"
-              aria-controls="hero-profile-panel"
-              data-profile="hr"
-            >
-              HR Operations
-            </button>
-            <button
-              class="profile-tab"
-              id="tab-data"
-              role="tab"
-              aria-selected="false"
-              aria-controls="hero-profile-panel"
-              data-profile="data"
-            >
-              Data Science &amp; BI
-            </button>
-          </div>
-
           <a class="contact-link" href="#contact">
             Get in touch <span aria-hidden="true">↗</span>
           </a>
@@ -665,20 +712,24 @@
       </div>
 
       <div class="hero-foot">
-        <span>Bogotá, Colombia · Open to opportunities</span>
+        <span>Madrid, Spain · Open to opportunities</span>
       </div>
     </section>
 
     <section class="resume-section" id="experience">
-      <div class="resume-tabs" role="tablist" aria-label="Professional information">
-        <button class="resume-tab is-selected" id="tab-technical" type="button" role="tab" aria-selected="true" aria-controls="panel-technical" tabindex="0">Technical Skills</button>
-        <button class="resume-tab" id="tab-achievements" type="button" role="tab" aria-selected="false" aria-controls="panel-achievements" tabindex="-1">ACHIEVEMENTS</button>
-        <button class="resume-tab" id="tab-work" type="button" role="tab" aria-selected="false" aria-controls="panel-work" tabindex="-1">WORK EXPERIENCE</button>
-        <button class="resume-tab" id="tab-education" type="button" role="tab" aria-selected="false" aria-controls="panel-education" tabindex="-1">EDUCATION</button>
-        <button class="resume-tab" id="tab-certifications" type="button" role="tab" aria-selected="false" aria-controls="panel-certifications" tabindex="-1">CERTIFICATIONS</button>
+      <div class="resume-tabs" role="tablist" aria-label="Professional profile sections">
+        <button class="resume-tab is-selected" id="tab-technical" data-profile-section="hr" type="button" role="tab" aria-selected="true" aria-controls="panel-technical" tabindex="0">Technical Skills</button>
+        <button class="resume-tab" id="tab-achievements" data-profile-section="hr" type="button" role="tab" aria-selected="false" aria-controls="panel-achievements" tabindex="-1">ACHIEVEMENTS</button>
+        <button class="resume-tab" id="tab-work" data-profile-section="hr" type="button" role="tab" aria-selected="false" aria-controls="panel-work" tabindex="-1">WORK EXPERIENCE</button>
+        <button class="resume-tab" id="tab-education" data-profile-section="hr" type="button" role="tab" aria-selected="false" aria-controls="panel-education" tabindex="-1">EDUCATION</button>
+        <button class="resume-tab" id="tab-certifications" data-profile-section="hr" type="button" role="tab" aria-selected="false" aria-controls="panel-certifications" tabindex="-1">CERTIFICATIONS</button>
+        <button class="resume-tab" id="tab-projects" data-profile-section="data" type="button" role="tab" aria-selected="false" aria-controls="panel-projects" tabindex="-1" hidden>PROJECTS</button>
+        <button class="resume-tab" id="tab-tools" data-profile-section="data" type="button" role="tab" aria-selected="false" aria-controls="panel-tools" tabindex="-1" hidden>TOOLS</button>
+        <button class="resume-tab" id="tab-learning" data-profile-section="data" type="button" role="tab" aria-selected="false" aria-controls="panel-learning" tabindex="-1" hidden>CURRENT LEARNING</button>
+        <button class="resume-tab" id="tab-goals" data-profile-section="data" type="button" role="tab" aria-selected="false" aria-controls="panel-goals" tabindex="-1" hidden>GOALS</button>
       </div>
 
-      <div class="resume-panel" id="panel-technical" role="tabpanel" aria-labelledby="tab-technical">
+      <div class="resume-panel" id="panel-technical" data-profile-section="hr" role="tabpanel" aria-labelledby="tab-technical">
         <div class="skills-heading">
           <h2>Technical Skills</h2>
         </div>
@@ -710,7 +761,7 @@
         </div>
       </div>
 
-      <div class="resume-panel" id="panel-achievements" role="tabpanel" aria-labelledby="tab-achievements" hidden>
+      <div class="resume-panel" id="panel-achievements" data-profile-section="hr" role="tabpanel" aria-labelledby="tab-achievements" hidden>
         <div class="skills-heading">
           <h2>ACHIEVEMENTS</h2>
         </div>
@@ -722,7 +773,7 @@
         </ul>
       </div>
 
-      <div class="resume-panel" id="panel-work" role="tabpanel" aria-labelledby="tab-work" hidden>
+      <div class="resume-panel" id="panel-work" data-profile-section="hr" role="tabpanel" aria-labelledby="tab-work" hidden>
         <div class="skills-heading">
           <h2>WORK EXPERIENCE</h2>
         </div>
@@ -809,7 +860,7 @@
         </div>
       </div>
 
-      <div class="resume-panel" id="panel-education" role="tabpanel" aria-labelledby="tab-education" hidden>
+      <div class="resume-panel" id="panel-education" data-profile-section="hr" role="tabpanel" aria-labelledby="tab-education" hidden>
         <div class="skills-heading">
           <h2>EDUCATION</h2>
         </div>
@@ -838,7 +889,7 @@
         </div>
       </div>
 
-      <div class="resume-panel" id="panel-certifications" role="tabpanel" aria-labelledby="tab-certifications" hidden>
+      <div class="resume-panel" id="panel-certifications" data-profile-section="hr" role="tabpanel" aria-labelledby="tab-certifications" hidden>
         <div class="skills-heading">
           <h2>CERTIFICATIONS</h2>
         </div>
@@ -848,22 +899,78 @@
           <li>EF SET English Certificate <strong>(C1 Advanced)</strong></li>
         </ul>
       </div>
+
+      <div class="resume-panel" id="panel-projects" data-profile-section="data" role="tabpanel" aria-labelledby="tab-projects" hidden>
+        <div class="skills-heading">
+          <h2>Projects</h2>
+        </div>
+        <ul class="achievement-list">
+          <li>My Data Science portfolio is in progress. I’ll add academic and personal projects as I build experience during my master’s degree.</li>
+        </ul>
+      </div>
+
+      <div class="resume-panel" id="panel-tools" data-profile-section="data" role="tabpanel" aria-labelledby="tab-tools" hidden>
+        <div class="skills-heading">
+          <h2>Tools</h2>
+        </div>
+        <div class="skills-list">
+          <div class="skill-row">
+            <h3>Microsoft Excel</h3>
+            <p>PivotTables, VLOOKUP, XLOOKUP, data reconciliation, and reporting.</p>
+          </div>
+          <div class="skill-row">
+            <h3>Data Science tools</h3>
+            <p>Building my toolkit as I progress through my master’s degree.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-panel" id="panel-learning" data-profile-section="data" role="tabpanel" aria-labelledby="tab-learning" hidden>
+        <div class="skills-heading">
+          <h2>Current Learning</h2>
+        </div>
+        <div class="education-list">
+          <div class="education-item">
+            <div>
+              <strong>Master in Data Science, Big Data and Business Analytics</strong>
+              <em>Universidad Complutense de Madrid · 2026–2027 · In progress</em>
+            </div>
+            <span>Madrid, Spain</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-panel" id="panel-goals" data-profile-section="data" role="tabpanel" aria-labelledby="tab-goals" hidden>
+        <div class="skills-heading">
+          <h2>Goals</h2>
+        </div>
+        <ul class="achievement-list">
+          <li>Build a solid foundation in Data Science, Big Data, and Business Analytics through my master’s degree.</li>
+          <li>Apply what I learn through practical projects and continue growing my portfolio.</li>
+        </ul>
+      </div>
     </section>
 
     <section class="contact-section" id="contact">
-      <div>
-        <p class="eyebrow">NEXT STEP</p>
-        <h2>Let’s connect.</h2>
+      <div class="contact-inner">
+        <div>
+          <p class="eyebrow">NEXT STEP</p>
+          <h2>Let’s connect.</h2>
+        </div>
+        <div class="contact-details">
+          <span class="contact-location">Madrid, Spain</span>
+          <a class="email-link" href="tel:+34634966034">+34 634 966 034</a>
+          <a class="email-link" href="mailto:edwamontoya.94@gmail.com">
+            edwamontoya.94@gmail.com <span aria-hidden="true">↗</span>
+          </a>
+        </div>
       </div>
-      <a class="email-link" href="mailto:edwamontoya.94@gmail.com">
-        edwamontoya.94@gmail.com <span aria-hidden="true">↗</span>
-      </a>
     </section>
   </main>
 
   <footer>
     <span>© <span id="year"></span> Edwin A. Monroy</span>
-    <span>Made with intention · Bogotá</span>
+    <span>Made with intention · Madrid</span>
   </footer>
 
   <script>
@@ -896,6 +1003,14 @@
         "aria-labelledby",
         profileKey === "hr" ? "tab-hr" : "tab-data"
       );
+
+      document.querySelectorAll("[data-profile-section]").forEach((section) => {
+        section.hidden = section.dataset.profileSection !== profileKey;
+      });
+      const firstResumeTab = document.querySelector(
+        `.resume-tab[data-profile-section="${profileKey}"]`
+      );
+      setResumeTab(firstResumeTab);
     }
 
     document.querySelectorAll(".profile-tab").forEach((button) => {
@@ -910,29 +1025,33 @@
         tab.classList.toggle("is-selected", isSelected);
         tab.setAttribute("aria-selected", String(isSelected));
         tab.tabIndex = isSelected ? 0 : -1;
-        document.getElementById(tab.getAttribute("aria-controls")).hidden = !isSelected;
+        if (!tab.hidden) {
+          document.getElementById(tab.getAttribute("aria-controls")).hidden = !isSelected;
+        }
       });
     }
 
-    resumeTabs.forEach((tab, index) => {
+    resumeTabs.forEach((tab) => {
       tab.addEventListener("click", () => setResumeTab(tab));
       tab.addEventListener("keydown", (event) => {
-        let nextIndex = index;
+        const visibleTabs = [...resumeTabs].filter((resumeTab) => !resumeTab.hidden);
+        const currentIndex = visibleTabs.indexOf(tab);
+        let nextIndex = currentIndex;
         if (event.key === "ArrowRight") {
-          nextIndex = (index + 1) % resumeTabs.length;
+          nextIndex = (currentIndex + 1) % visibleTabs.length;
         } else if (event.key === "ArrowLeft") {
-          nextIndex = (index - 1 + resumeTabs.length) % resumeTabs.length;
+          nextIndex = (currentIndex - 1 + visibleTabs.length) % visibleTabs.length;
         } else if (event.key === "Home") {
           nextIndex = 0;
         } else if (event.key === "End") {
-          nextIndex = resumeTabs.length - 1;
+          nextIndex = visibleTabs.length - 1;
         } else {
           return;
         }
 
         event.preventDefault();
-        resumeTabs[nextIndex].focus();
-        setResumeTab(resumeTabs[nextIndex]);
+        visibleTabs[nextIndex].focus();
+        setResumeTab(visibleTabs[nextIndex]);
       });
     });
 
